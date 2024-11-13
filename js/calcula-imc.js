@@ -1,42 +1,65 @@
-var titulo = document.querySelector('.titulo');
-titulo.textContent = "Nícolas Nutrição";
+var titulo = document.querySelector(".titulo");
+titulo.textContent = "Jeniffer Nutrição";
 
-var pacientes = document.querySelectorAll('.paciente');
+var pacientes = document.querySelectorAll(".paciente");
+console.log(pacientes);
 
-for (var i = 0; i < 5; i++) {
-    console.log(pacientes[i])
-    
-    var tdPeso = pacientes[i].querySelector('.info-peso');
-    var peso = tdPeso.textContent;
+for(var i = 0; i < 5; i++) {
+  console.log(pacientes[i]);
+  
+  var tdPeso = pacientes[i].querySelector(".info-peso");
+var peso = tdPeso.textContent;
 
-    var tdAltura = pacientes[i].querySelector('.info-altura');
-    var altura = tdAltura.textContent;
+var tdAltura = pacientes[i].querySelector(".info-altura");
+var altura = tdAltura.textContent;
 
-    var tdImc = pacientes[i].querySelector('.info-imc');
+var tdImc = pacientes[i].querySelector(".info-imc");
 
-    var pesoValido = true;
-    var alturaValida = true;
+var pesoEhValido = validaPeso(peso);
+var alturaEhValida = validaAltura(altura); 
 
-    if (peso < 0 || peso > 600) {
-        tdImc.textContent = 'Peso inválido';
-        pesoValido = false;
-        pacientes[i].classList.add('dado-invalido');
-    }
 
-    if (altura < 0 || altura > 2.80) {
-        tdImc.textContent = 'Altura inválida';
-        alturaValida = false;
-        pacientes[i].classList.add('dado-invalido');
-    }
-    
-    if (pesoValido && alturaValida) {
-        var imc = calculaImc(peso, altura);
-        tdImc.textContent = imc;
-    }
+
+if (peso < 0 || peso > 600){
+  tdImc.textContent = "peso inválido";
+  pesoEhValido = false;
+  pacientes[i].classList.add("dado-invalido");
+}
+
+if (altura < 0 || altura > 2.00){
+  tdImc.textContent = "altura-invalida"
+  alturaEhValida = false;
+  pacientes[i].classList.add("dados-invalidos");
+}
+
+if(pesoEhValido && alturaEhValida){
+  var imc = calculaImc / (peso, altura);
+  tdImc.textContent = imc;
+}
 }
 
 function calculaImc(peso, altura) {
-    var imc = 0;
-    imc = peso / (altura * altura);
-    return imc.toFixed(2);
+  var imc = 0;
+  
+  imc = peso / (altura * altura);
+  
+  return imc.toFixed(2);
+}
+
+function validaPeso(peso){
+  if (peso > 0 && peso < 600){
+    return true;
+    
+  } else{p
+    return false;
+  }
+}
+
+function validaAltura(altura){
+  if(altura > 0 && altura < 2.80){
+    return true;
+    
+  }else{
+    return false;
+  }
 }
